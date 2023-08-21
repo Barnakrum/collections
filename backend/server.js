@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const userRouter = require("./routes/userRoutes");
+
 dotenv.config();
 
 port = process.env.PORT;
@@ -18,6 +20,8 @@ if (process.env.ENV === "DEVELOPMENT") {
 app.get("/", (req, res) => {
     res.send("hello");
 });
+
+app.use("/api/user", userRouter);
 
 const start = async () => {
     await mongoose.connect(process.env.MONGO_URI);
