@@ -17,6 +17,8 @@ if (process.env.ENV === "DEVELOPMENT") {
     app.use(cors({ origin: process.env.FRONTEND_ORIGIN }));
 }
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
     res.send("hello");
 });
