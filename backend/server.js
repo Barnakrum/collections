@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 dotenv.config();
 
@@ -18,6 +19,13 @@ app.get("/", (req, res) => {
     res.send("hello");
 });
 
-app.listen(port, () => {
-    console.log("listening on port: " + port);
-});
+const start = async () => {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("connect to DB");
+
+    app.listen(port, () => {
+        console.log("listening on port: " + port);
+    });
+};
+
+start();
