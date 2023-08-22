@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../models/userModel");
 
 const schema = new mongoose.Schema({
     name: {
@@ -8,6 +9,11 @@ const schema = new mongoose.Schema({
     tags: {
         type: [String],
         required: false,
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: User,
     },
 });
 
