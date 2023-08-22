@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const schema = mongoose.Schema({
+const schema = new mongoose.Schema({
     name: {
         type: mongoose.Types.ObjectId,
         required: true,
@@ -12,5 +12,4 @@ const schema = mongoose.Schema({
 });
 
 const Collection = mongoose.model("Collection", schema);
-
-module.exoprts = Collection;
+module.exports = Collection;
