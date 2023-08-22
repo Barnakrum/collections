@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/userRoutes");
+const collectionRouter = require("./routes/collectionRoutes");
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/collection", collectionRouter);
 
 const start = async () => {
     await mongoose.connect(process.env.MONGO_URI);
