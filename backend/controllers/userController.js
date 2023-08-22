@@ -1,8 +1,7 @@
 const User = require("../models/userModel");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const userLogin = async (req, res) => {
+const userLogin = async function (req, res) {
     try {
         const { email, password } = req.body;
 
@@ -22,7 +21,7 @@ const userLogin = async (req, res) => {
             return res.status(400).send("Wrong password");
         }
 
-        const token = jwt.sign({ user_id: user._id, email }, process.env.TOKEN_KEY, { expiresIn: "1d" });
+        const token = this.signJwt(user);
         res.status(200).cookie("session", token, { secure: true, httpOnly: true, sameSite: "strict" }).send({ username: user.username });
     } catch (error) {
         res.status(400).send(error.message);
@@ -50,8 +49,7 @@ const userRegister = async (req, res) => {
 
         const user = await User.create({ username, email, password: hashedPassword });
 
-        const token = jwt.sign({ user_id: user._id, email }, process.env.TOKEN_KEY, { expiresIn: "1d" });
-
+        const token = this.signJwt(user);
         res.status(201).cookie("session", token, { secure: true, httpOnly: true, sameSite: "strict" }).send({ username });
     } catch (error) {
         res.status(400).send(error.message);
