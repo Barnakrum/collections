@@ -15,4 +15,32 @@ const postCollection = async (req, res) => {
     }
 };
 
-module.exports = { postCollection };
+const deleteCollection = async (req, res) => {
+    try {
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+const patchCollection = async (req, res) => {
+    try {
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+const getCollection = async (req, res) => {
+    try {
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+const getAllCollections = async (req, res) => {
+    try {
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+module.exports = { postCollection, deleteCollection, patchCollection, getAllCollections, getCollection };
