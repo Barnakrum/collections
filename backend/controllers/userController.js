@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
-const userLogin = async function (req, res) {
+async function userLogin(req, res) {
     try {
         const { email, password } = req.body;
 
@@ -21,12 +21,12 @@ const userLogin = async function (req, res) {
             return res.status(400).send("Wrong password");
         }
 
-        const token = this.signJwt(user);
+        const token = User.signJwt(user);
         res.status(200).cookie("session", token, { secure: true, httpOnly: true, sameSite: "strict" }).send({ username: user.username });
     } catch (error) {
         res.status(400).send(error.message);
     }
-};
+}
 
 const userRegister = async (req, res) => {
     try {
@@ -49,7 +49,7 @@ const userRegister = async (req, res) => {
 
         const user = await User.create({ username, email, password: hashedPassword });
 
-        const token = this.signJwt(user);
+        const token = User.signJwt(user);
         res.status(201).cookie("session", token, { secure: true, httpOnly: true, sameSite: "strict" }).send({ username });
     } catch (error) {
         res.status(400).send(error.message);
