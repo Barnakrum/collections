@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const postCollection = async (req, res) => {
     const { name, tags } = req.body;
-    const user = await User.findById(jwt.verify(req.cookies.session, process.env.TOKEN_KEY).user_id);
+    const { user } = req;
 
     try {
         const collection = await Collection.create({ name, tags, user: user._id });
