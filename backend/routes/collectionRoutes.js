@@ -1,17 +1,18 @@
 const express = require("express");
 const auth = require("../middlewares/auth");
+const verifyMongoId = require("../middlewares/verifyMongoId");
 
 const { postCollection, getAllCollections, getCollection, patchCollection, deleteCollection } = require("../controllers/collectionController");
 
 const router = express.Router();
 
 router.get("/", getAllCollections);
-router.get("/:id", getCollection);
+router.get("/:id", verifyMongoId(), getCollection);
 
 router.post("/", auth("collection"), postCollection);
 
-router.delete("/:id", auth("collection"), deleteCollection);
+router.delete("/:id", verifyMongoId(), auth("collection"), deleteCollection);
 
-router.patch("/:id", auth("collection"), patchCollection);
+router.patch("/:id", verifyMongoId(), auth("collection"), patchCollection);
 
 module.exports = router;

@@ -12,9 +12,6 @@ const authMiddleware = function (resource) {
             if (!req.cookies.session) {
                 return res.status(401).send("Please log in");
             }
-            if (isThereParamId && !mongoose.isValidObjectId(req.params.id)) {
-                return res.status(400).send("Please enter valid id");
-            }
 
             const userId = jwt.verify(req.cookies.session, process.env.TOKEN_KEY).user_id;
             const user = await User.findById(userId);
