@@ -31,6 +31,8 @@ const patchCollection = async (req, res) => {
 
 const getCollection = async (req, res) => {
     try {
+        const collection = await Collection.findById(req.params.id);
+        res.status(200).send(collection);
     } catch (error) {
         res.status(400).send(error.message);
     }
