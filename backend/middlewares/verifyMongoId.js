@@ -8,3 +8,5 @@ const verifyMongoId = function () {
         next();
     };
 };
+
+module.exports = verifyMongoId;
