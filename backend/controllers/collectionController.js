@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Collection = require("../models/collectionModel");
 const User = require("../models/userModel");
 
@@ -17,6 +18,8 @@ const postCollection = async (req, res) => {
 
 const deleteCollection = async (req, res) => {
     try {
+        const collection = await Collection.findOneAndDelete({ _id: req.params.id });
+        res.status(200).send(collection);
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -24,6 +27,8 @@ const deleteCollection = async (req, res) => {
 
 const patchCollection = async (req, res) => {
     try {
+        const collection = await Collection.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true });
+        res.status(200).send(collection);
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -40,6 +45,8 @@ const getCollection = async (req, res) => {
 
 const getAllCollections = async (req, res) => {
     try {
+        const collections = await Collection.find({ ...req.query }).setOptions({ sanitizeFilter: true });
+        res.status(200).send(collections);
     } catch (error) {
         res.status(400).send(error.message);
     }
