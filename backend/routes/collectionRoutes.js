@@ -6,7 +6,7 @@ const { postCollection, getAllCollections, getCollection, patchCollection, delet
 
 const router = express.Router();
 
-router.get("/", getAllCollections);
+router.get("/", verifyMongoId("query"), getAllCollections);
 router.get("/:id", verifyMongoId(), getCollection);
 
 router.post("/", auth("collection"), postCollection);
