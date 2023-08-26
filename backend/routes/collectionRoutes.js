@@ -10,6 +10,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         cb(null, req.params.id + path.extname(file.originalname));
+        req.fileExtension = path.extname(file.originalname);
     },
 });
 const upload = multer({ storage: storage });
