@@ -10,6 +10,10 @@ const schema = new mongoose.Schema({
         type: [String],
         required: false,
     },
+    imageUrl: {
+        type: String,
+        required: false,
+    },
     user: {
         type: mongoose.Types.ObjectId,
         required: true,
