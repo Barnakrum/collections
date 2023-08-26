@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const { postCollection, getAllCollections, getCollection, patchCollection, deleteCollection, postCollectionImage } = require("../controllers/collectionController");
+const { postCollection, getAllCollections, getCollection, patchCollection, deleteCollection, postCollectionImage, deleteCollectionImage } = require("../controllers/collectionController");
 
 const router = express.Router();
 
@@ -26,6 +26,7 @@ router.post("/", auth("collection"), postCollection);
 router.post("/:id/image", verifyMongoId(), auth("collection"), upload.single("image"), postCollectionImage);
 
 router.delete("/:id", verifyMongoId(), auth("collection"), deleteCollection);
+router.delete("/:id/image", verifyMongoId(), auth("collection"), deleteCollectionImage);
 
 router.patch("/:id", verifyMongoId(), auth("collection"), patchCollection);
 

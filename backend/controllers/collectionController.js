@@ -46,6 +46,19 @@ const postCollectionImage = async (req, res) => {
     }
 };
 
+const deleteCollectionImage = async (req, res) => {
+    try {
+        const collection = await Collection.findById(req.params.id);
+        await cloudinary.uploader.destroy(collection._id);
+        collection.imageUrl = null;
+        await collection.save();
+        collection.imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
+        res.status(200).send(collection);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
 const deleteCollection = async (req, res) => {
     try {
         const collection = await Collection.findOneAndDelete({ _id: req.params.id });
@@ -95,4 +108,4 @@ const getAllCollections = async (req, res) => {
     }
 };
 
-module.exports = { postCollection, deleteCollection, patchCollection, getAllCollections, getCollection, postCollectionImage };
+module.exports = { postCollection, deleteCollection, patchCollection, getAllCollections, getCollection, postCollectionImage, deleteCollectionImage };
