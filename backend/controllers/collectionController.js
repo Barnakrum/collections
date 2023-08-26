@@ -49,6 +49,10 @@ const postCollectionImage = async (req, res) => {
 const deleteCollection = async (req, res) => {
     try {
         const collection = await Collection.findOneAndDelete({ _id: req.params.id });
+        if (!!collection.imageUrl && !collection.imageUrl.includes("placeholder")) {
+            await cloudinary.uploader.destroy(collection._id);
+            collection.imageUrl = "removed";
+        }
         res.status(200).send(collection);
     } catch (error) {
         res.status(400).send(error.message);
