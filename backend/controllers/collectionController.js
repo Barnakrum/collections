@@ -67,6 +67,9 @@ const patchCollection = async (req, res) => {
 const getCollection = async (req, res) => {
     try {
         const collection = await Collection.findById(req.params.id);
+        if (!collection.imageUrl) {
+            collection.imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
+        }
         res.status(200).send(collection);
     } catch (error) {
         res.status(400).send(error.message);
@@ -76,6 +79,12 @@ const getCollection = async (req, res) => {
 const getAllCollections = async (req, res) => {
     try {
         const collections = await Collection.find({ ...req.query }).setOptions({ sanitizeFilter: true });
+        for (let i = 0; i < collections.length; i++) {
+            if (!collections[i].imageUrl) {
+                collections[i].imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
+            }
+        }
+
         res.status(200).send(collections);
     } catch (error) {
         res.status(400).send(error.message);
