@@ -1,6 +1,6 @@
 ### To Do
 
--   [ ] Adding and removing images for collections
+-   [x] Adding and removing images for collections
 -   [ ] Model for items (collection > [items])
 -   [ ] Likes for items
 -   [ ] Comments for items (websockets)
