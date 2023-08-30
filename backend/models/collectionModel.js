@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../models/userModel");
+const Item = require("../models/itemModel");
 
 const schema = new mongoose.Schema({
     name: {
@@ -18,6 +19,11 @@ const schema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         required: true,
         ref: User,
+    },
+    items: {
+        type: [mongoose.Types.ObjectId],
+        required: false,
+        ref: Item,
     },
 });
 
