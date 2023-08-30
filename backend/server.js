@@ -9,6 +9,7 @@ const logger = require("./middlewares/logger");
 
 const userRouter = require("./routes/userRoutes");
 const collectionRouter = require("./routes/collectionRoutes");
+const itemRouter = require("./routes/itemRoutes");
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRouter);
 app.use("/api/collection", collectionRouter);
+app.use("/api/item", itemRouter);
 
 const start = async () => {
     await mongoose.connect(process.env.MONGO_URI);
