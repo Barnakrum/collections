@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const User = require("../models/userModel");
+
 const schema = mongoose.Schema({
     name: {
         type: String,
@@ -10,6 +12,10 @@ const schema = mongoose.Schema({
         type: String,
         required: true,
         unique: false,
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: User,
     },
 });
 
