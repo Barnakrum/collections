@@ -17,6 +17,10 @@ const schema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: User,
     },
+    collectionId: {
+        type: mongoose.Types.ObjectId,
+        ref: "Collection",
+    },
 });
 
 const Item = mongoose.model("Item", schema);

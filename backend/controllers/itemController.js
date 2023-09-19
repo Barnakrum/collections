@@ -15,7 +15,8 @@ const postItem = async (req, res) => {
         const { name, description } = req.body;
         const { user } = req;
         const collection = await Collection.findById(req.params.id);
-        const item = await Item.create({ name, description, user: user._id });
+
+        const item = await Item.create({ name, description, collectionId: collection._id, user: user._id });
         collection.items.unshift(item);
         await collection.save();
         res.status(201).send(item);
