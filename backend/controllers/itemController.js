@@ -4,6 +4,7 @@ const Collection = require("../models/collectionModel");
 const getItem = async (req, res) => {
     try {
         const item = await Item.findById(req.params.id);
+
         res.status(200).send(item);
     } catch (error) {
         res.status(400).send(error.message);
@@ -12,11 +13,11 @@ const getItem = async (req, res) => {
 
 const postItem = async (req, res) => {
     try {
-        const { name, description } = req.body;
+        const { name, description, stringFields, numberFields, dateFields, booleanFields, colorFields } = req.body;
         const { user } = req;
         const collection = await Collection.findById(req.params.id);
 
-        const item = await Item.create({ name, description, collectionId: collection._id, user: user._id });
+        const item = await Item.create({ name, description, collectionId: collection._id, user: user._id, stringFields, numberFields, dateFields, booleanFields, colorFields });
         collection.items.unshift(item);
         await collection.save();
         res.status(201).send(item);
