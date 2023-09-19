@@ -6,6 +6,8 @@ const verifyMongoId = function (location) {
             return checkUrlParams;
         case "query":
             return checkQueryParams;
+        case "both":
+            return checkBoth;
     }
 };
 
@@ -21,6 +23,11 @@ const checkUrlParams = function (req, res, next) {
         return res.status(400).send("Please enter valid id");
     }
     next();
+};
+
+const checkBoth = function (req, res, next) {
+    checkQueryParams(req, res, () => {});
+    checkUrlParams(req, res, next);
 };
 
 module.exports = verifyMongoId;
