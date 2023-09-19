@@ -15,6 +15,7 @@ cloudinary.config({
 
 const Collection = require("../models/collectionModel");
 const User = require("../models/userModel");
+const Item = require("../models/itemModel");
 
 const postCollection = async (req, res) => {
     const { name, tags } = req.body;
@@ -65,6 +66,9 @@ const deleteCollection = async (req, res) => {
         if (!!collection.imageUrl && !collection.imageUrl.includes("placeholder")) {
             await cloudinary.uploader.destroy(collection._id);
             collection.imageUrl = "removed";
+        }
+        for (let i = 0; i < collection.items.length; i++) {
+            await Item.findOneAndDelete(collection.items[i]._id);
         }
         res.status(200).send(collection);
     } catch (error) {
