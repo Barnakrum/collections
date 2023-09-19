@@ -88,6 +88,9 @@ const patchCollection = async (req, res) => {
 const getCollection = async (req, res) => {
     try {
         const collection = await Collection.findById(req.params.id);
+        if (!collection) {
+            return res.status(400).send("There is no collection with that id");
+        }
         if (!collection.imageUrl) {
             collection.imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
         }
