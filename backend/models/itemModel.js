@@ -21,6 +21,27 @@ const schema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Collection",
     },
+    stringFields: {
+        type: [String],
+    },
+    numberFields: {
+        type: [Number],
+    },
+    dateFields: {
+        type: [Date],
+    },
+    booleanFields: {
+        type: [Boolean],
+    },
+    colorFields: {
+        type: [
+            {
+                red: Number,
+                green: Number,
+                blue: Number,
+            },
+        ],
+    },
 });
 
 const Item = mongoose.model("Item", schema);
