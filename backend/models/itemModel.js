@@ -39,6 +39,7 @@ const schema = mongoose.Schema({
                 red: Number,
                 green: Number,
                 blue: Number,
+                _id: false,
             },
         ],
     },
