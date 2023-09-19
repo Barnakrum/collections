@@ -25,6 +25,21 @@ const schema = new mongoose.Schema({
         required: false,
         ref: Item,
     },
+    stringFieldsNames: {
+        type: [String],
+    },
+    numberFieldsNames: {
+        type: [String],
+    },
+    dateFieldsNames: {
+        type: [String],
+    },
+    booleanFieldsNames: {
+        type: [String],
+    },
+    colorFieldsNames: {
+        type: [String],
+    },
 });
 
 const Collection = mongoose.model("Collection", schema);
