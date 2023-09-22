@@ -1,11 +1,12 @@
 import Dropdown from "./Dropdown";
 
 const ThemeSelector = () => {
+    const localStorageItemName = "theme";
     const changeTheme = (theme) => {
-        localStorage.setItem("theme", theme);
+        localStorage.setItem(localStorageItemName, theme);
         document.querySelector("html").setAttribute("data-theme", theme);
     };
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem(localStorageItemName);
     if (!!savedTheme) changeTheme(savedTheme);
     else changeTheme("default");
     return (
@@ -14,6 +15,7 @@ const ThemeSelector = () => {
             options={["Default", "Light", "Dark"]}
             dropdownId={"themeDropdown"}
             button={"Theme"}
+            localStorageItem={localStorageItemName}
             onOptionClick={changeTheme}
         />
     );
