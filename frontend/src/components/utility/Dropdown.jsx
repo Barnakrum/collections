@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Dropdown = (props) => {
     let dropdown;
+
+    const [selectedOption, setSelectedOption] = useState(
+        localStorage.getItem(props.localStorageItem),
+    );
     useEffect(() => {
         dropdown = document.getElementById(props.dropdownId);
-    });
+    }, [selectedOption]);
     const handleClick = () => {
         dropdown.classList.toggle("hidden");
     };
@@ -24,21 +28,29 @@ const Dropdown = (props) => {
                 <button
                     onClick={() => handleClick()}
                     id={"dropdown-button"}
-                    className="bg-primary"
+                    className="rounded-sm p-2"
                 >
                     {!props.button ? "Button" : props.button}
                 </button>
                 <div
                     id={props.dropdownId}
-                    className="bg-secondary absolute z-[1] hidden min-w-[160px]"
+                    className="bg-background border-primary absolute right-0 z-[1] hidden rounded-sm border-2 p-2 "
                 >
                     {props.values.map((value, index) => (
                         <button
-                            className="block"
+                            className={
+                                (value === selectedOption
+                                    ? "border-primary border"
+                                    : "") +
+                                "  block w-full rounded-sm px-4 py-1"
+                            }
                             value={value}
                             key={index}
+                            disabled={value === selectedOption ? true : false}
                             type="button"
                             onClick={(event) => {
+                                setSelectedOption(event.target.value);
+
                                 handleClick();
                                 props.onOptionClick(event.target.value);
                             }}
