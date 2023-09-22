@@ -21,6 +21,13 @@ body {
 }
 
 @layer base {
+    html[data-theme="default"] {
+        --color-text: #f9f7fd;
+        --color-background: #040208;
+        --color-primary: #b531c4;
+        --color-secondary: #390e28;
+        --color-accent: #d04398;
+    }
     html[data-theme="light"] {
         --color-text: #15050a;
         --color-background: #fcf3f5;
