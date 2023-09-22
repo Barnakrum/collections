@@ -7,10 +7,11 @@ const ThemeSelector = () => {
     };
     const savedTheme = localStorage.getItem("theme");
     if (!!savedTheme) changeTheme(savedTheme);
+    else changeTheme("default");
     return (
         <Dropdown
-            values={["light", "dark"]}
-            options={["Light", "Dark"]}
+            values={["default", "light", "dark"]}
+            options={["Default", "Light", "Dark"]}
             dropdownId={"themeDropdown"}
             button={"Theme"}
             onOptionClick={changeTheme}
