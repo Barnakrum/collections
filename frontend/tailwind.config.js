@@ -4,11 +4,11 @@ export default {
     theme: {
         extend: {
             colors: {
-                text: "var(--color-text)",
-                background: "var(--color-background)",
-                primary: "var(--color-primary)",
-                secondary: "var(--color-secondary)",
-                accent: "var(--color-accent)",
+                text: "rgb(var(--color-text) / <alpha-value>)",
+                background: "rgb(var(--color-background)/<alpha-value>)",
+                primary: "rgb(var(--color-primary) / <alpha-value>)",
+                secondary: "rgb(var(--color-secondary)/ <alpha-value>)",
+                accent: "rgb(var(--color-accent)/<alpha-value>)",
             },
         },
     },
