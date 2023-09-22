@@ -20,6 +20,15 @@ body {
     margin: 0;
 }
 
+input {
+    @apply bg-background;
+    @layer @apply border-background-50;
+    @apply focus:border-primary;
+    @apply rounded-md;
+    @apply border p-2;
+    @apply focus:outline-none;
+}
+
 @layer base {
     html[data-theme="default"] {
         --color-text: 249 247 253;
