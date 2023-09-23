@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
 const Dropdown = (props) => {
-    let dropdown;
-
+    const [dropdown, setDropdown] = useState(
+        document.getElementById(props.dropdownId),
+    );
     const [selectedOption, setSelectedOption] = useState(
         localStorage.getItem(props.localStorageItem),
     );
     useEffect(() => {
-        dropdown = document.getElementById(props.dropdownId);
+        setDropdown(document.getElementById(props.dropdownId));
     }, [selectedOption]);
     const handleClick = () => {
         dropdown.classList.toggle("hidden");
