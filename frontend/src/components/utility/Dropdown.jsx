@@ -25,11 +25,11 @@ const Dropdown = (props) => {
 
     return (
         <>
-            <div className="relative inline-block">
+            <div className="relative inline-block w-full">
                 <button
                     onClick={() => handleClick()}
                     id={"dropdown-button"}
-                    className="rounded-sm p-2"
+                    className=" block w-full rounded-sm text-right"
                 >
                     {!props.button ? "Button" : props.button}
                 </button>
