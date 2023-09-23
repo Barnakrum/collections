@@ -30,6 +30,10 @@ input {
 }
 
 @layer base {
+    html {
+        --topbar-height: 90px;
+    }
+    html,
     html[data-theme="default"] {
         --color-text: 249 247 253;
         --color-background: 4 2 8;
