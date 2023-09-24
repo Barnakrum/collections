@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 
 const Dropdown = (props) => {
-    const [dropdown, setDropdown] = useState(
-        document.getElementById(props.dropdownId),
-    );
-    const [selectedOption, setSelectedOption] = useState(
-        localStorage.getItem(props.localStorageItem),
-    );
+    const [dropdown, setDropdown] = useState(document.getElementById(props.dropdownId));
+    const [selectedOption, setSelectedOption] = useState(localStorage.getItem(props.localStorageItem));
     useEffect(() => {
         setDropdown(document.getElementById(props.dropdownId));
     }, [selectedOption]);
@@ -15,36 +11,21 @@ const Dropdown = (props) => {
     };
 
     window.onclick = (event) => {
-        if (
-            !event.target.matches("#dropdown-button") &&
-            !dropdown.classList.contains("hidden")
-        ) {
+        if (!event.target.matches("#dropdown-button") && !dropdown.classList.contains("hidden")) {
             handleClick();
         }
     };
 
     return (
         <>
-            <div className="relative inline-block w-full">
-                <button
-                    onClick={() => handleClick()}
-                    id={"dropdown-button"}
-                    className=" block w-full rounded-sm text-right"
-                >
+            <div className="relative inline-block w-full h-full">
+                <button onClick={() => handleClick()} id={"dropdown-button"} className="block w-full h-full text-right rounded-sm md:hover:text-primary ">
                     {!props.button ? "Button" : props.button}
                 </button>
-                <div
-                    id={props.dropdownId}
-                    className="bg-background border-primary absolute right-0 z-[1] hidden rounded-sm border-2 p-2 "
-                >
+                <div id={props.dropdownId} className="bg-background border-primary absolute right-0 z-[1] hidden rounded-sm border-2 p-2 ">
                     {props.values.map((value, index) => (
                         <button
-                            className={
-                                (value === selectedOption
-                                    ? "border-primary border"
-                                    : "") +
-                                "  block w-full rounded-sm px-4 py-1"
-                            }
+                            className={(value === selectedOption ? "border-primary border" : "") + "  block w-full rounded-sm px-4 py-1"}
                             value={value}
                             key={index}
                             disabled={value === selectedOption ? true : false}
@@ -54,8 +35,7 @@ const Dropdown = (props) => {
 
                                 handleClick();
                                 props.onOptionClick(event.target.value);
-                            }}
-                        >
+                            }}>
                             {props.options[index]}
                         </button>
                     ))}
