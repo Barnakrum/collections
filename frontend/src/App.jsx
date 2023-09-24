@@ -3,31 +3,28 @@ import Home from "./components/Home";
 import routes from "./utilities/routes";
 import ThemeSelector from "./components/utility/ThemeSelector";
 import Topbar from "./components/Topbar";
+import Menu from "./components/Menu";
 
 function App() {
     return (
         <>
             <BrowserRouter>
-                <div className="text-text bg-background flex h-screen flex-col justify-around p-0">
-                    <header className=" w-full ">
+                <div className="flex flex-col justify-around h-screen p-0 text-text bg-background">
+                    <header className="w-full">
                         <Topbar>
                             <div>Logo/Name</div>
-                            <ThemeSelector />
+                            <Menu />
                         </Topbar>
                     </header>
-                    <main className=" h-10 w-full flex-grow ">
+                    <main className="flex-grow w-full h-10">
                         <Routes>
                             <Route path="/" index element={<Home />} />
                             {routes.map((route, index) => (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={route.element}
-                                />
+                                <Route key={index} path={route.path} element={route.element} />
                             ))}
                         </Routes>
                     </main>
-                    <footer className=" w-full">FOOTER</footer>
+                    <footer className="w-full ">FOOTER</footer>
                 </div>
             </BrowserRouter>
         </>
