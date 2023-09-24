@@ -27,11 +27,19 @@ body {
 
 input {
     @apply bg-background;
-    @layer @apply border-background-50;
+    @apply border-text/30;
     @apply focus:border-primary;
     @apply rounded-md;
     @apply border p-2;
     @apply focus:outline-none;
+}
+.form-button {
+    @apply p-2;
+    @apply transition-colors;
+    @apply grow;
+    @apply text-background;
+    @apply hover:bg-transparent;
+    @apply hover:text-primary;
 }
 
 @layer base {
