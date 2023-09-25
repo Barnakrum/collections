@@ -22,7 +22,7 @@ async function userLogin(req, res) {
         }
 
         const token = User.signJwt(user);
-        res.status(200).cookie("session", token, { secure: true, httpOnly: true, sameSite: "none" }).send({ username: user.username });
+        res.status(200).cookie("session", token, { secure: true, httpOnly: true, sameSite: "none" }).send({ username: user.username, id: user._id });
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -50,7 +50,7 @@ const userRegister = async (req, res) => {
         const user = await User.create({ username, email, password: hashedPassword });
 
         const token = User.signJwt(user);
-        res.status(201).cookie("session", token, { secure: true, httpOnly: true, sameSite: "none" }).send({ username });
+        res.status(201).cookie("session", token, { secure: true, httpOnly: true, sameSite: "none" }).send({ username, id: user._id });
     } catch (error) {
         res.status(400).send(error.message);
     }
