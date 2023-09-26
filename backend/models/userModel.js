@@ -16,6 +16,10 @@ const schema = new mongoose.Schema({
         required: true,
         type: String,
     },
+    isEmailVerifed: {
+        type: Boolean,
+        default: false,
+    },
     isAdmin: {
         type: Boolean,
         default: false,
