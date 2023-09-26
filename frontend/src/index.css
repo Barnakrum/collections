@@ -53,6 +53,7 @@ input {
         --color-primary: 181 49 196;
         --color-secondary: 57 14 40;
         --color-accent: 208 67 152;
+        --color-error: 255 0 0;
     }
     html[data-theme="light"] {
         --color-text: 21 5 10;
@@ -60,6 +61,7 @@ input {
         --color-primary: 243 79 131;
         --color-secondary: 245 214 223;
         --color-accent: 48 96 207;
+        --color-error: 255 0 0;
     }
     html[data-theme="dark"] {
         --color-text: 252 243 245;
@@ -67,5 +69,6 @@ input {
         --color-primary: 118 213 77;
         --color-secondary: 41 10 19;
         --color-accent: 172 191 236;
+        --color-error: 255 0 0;
     }
 }
