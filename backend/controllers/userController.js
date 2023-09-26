@@ -15,6 +15,10 @@ async function userLogin(req, res) {
             return res.status(404).send({ message: "No user with that email" });
         }
 
+        if (!user.isEmailVerifed) {
+            return res.status(400).send({ message: "Please confirm your email" });
+        }
+
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
         if (!isPasswordCorrect) {
