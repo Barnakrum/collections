@@ -1,6 +1,7 @@
 import Home from "../components/Home";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
+import VerifyEmail from "../components/auth/VerifyEmail";
 
 const routes = [
     {
@@ -15,6 +16,10 @@ const routes = [
     {
         path: "/register",
         element: <Register />,
+    },
+    {
+        path: "/verify-email/:token/:email",
+        element: <VerifyEmail />,
     },
 ];
 
