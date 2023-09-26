@@ -40,6 +40,8 @@ input {
     @apply text-background;
     @apply hover:bg-transparent;
     @apply hover:text-primary;
+    @apply disabled:text-primary;
+    @apply disabled:bg-primary/30;
 }
 
 @layer base {
