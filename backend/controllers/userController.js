@@ -1,6 +1,8 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
+const transporter = require("../services/transporter");
+
 async function userLogin(req, res) {
     try {
         const { email, password } = req.body;
@@ -51,13 +53,43 @@ const userRegister = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({ username, email, password: hashedPassword });
+        const emailVerifyHash = await bcrypt.hash(username + email + process.env.TOKEN_KEY, 10);
 
-        const token = User.signJwt(user);
-        res.status(201).cookie("session", token, { secure: true, httpOnly: true, sameSite: "none" }).send({ username, id: user._id });
+        const linkForVerification = `${process.env.FRONTEND_ORIGIN}/verify-email/${encodeURIComponent(`${emailVerifyHash}`)}/${email}/`;
+
+        await transporter.sendMail({
+            from: `Collections <${process.env.SMTP_USER}>`,
+            to: email,
+            subject: "Verify Email",
+            html: `<h4>Use this link to verify your email</h4><a href="${linkForVerification}">${linkForVerification}</a>`,
+        });
+        await User.create({ username, email, password: hashedPassword });
+
+        res.status(201).send({ message: "User created. Verify your adress email" });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
 };
 
-module.exports = { userLogin, userRegister };
+const userVerifyEmail = async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.params.email });
+
+        if (!user) {
+            return res.status(404).send({ message: "No user with that email" });
+        }
+
+        const isHashCorrect = await bcrypt.compare(user.username + req.params.email + process.env.TOKEN_KEY, decodeURIComponent(req.params.token));
+        if (isHashCorrect) {
+            user.isEmailVerifed = true;
+            await user.save();
+            res.status(200).send({ message: "Email verifed, You may login now" });
+        } else {
+            res.status(400).send({ message: "Wrong code" });
+        }
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+};
+
+module.exports = { userLogin, userRegister, userVerifyEmail };
