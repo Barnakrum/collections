@@ -13,14 +13,14 @@ const verifyMongoId = function (location) {
 
 const checkQueryParams = function (req, res, next) {
     if (!!req.query.user && !mongoose.isValidObjectId(req.query.user)) {
-        return res.status(400).send("User id is invalid");
+        return res.status(400).send({ message: "User id is invalid" });
     }
     next();
 };
 
 const checkUrlParams = function (req, res, next) {
     if (!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(400).send("Please enter valid id");
+        return res.status(400).send({ message: "Please enter valid id" });
     }
     next();
 };

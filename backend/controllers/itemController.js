@@ -7,7 +7,7 @@ const getItem = async (req, res) => {
 
         res.status(200).send(item);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -22,7 +22,7 @@ const postItem = async (req, res) => {
         await collection.save();
         res.status(201).send(item);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -31,7 +31,7 @@ const patchItem = async (req, res) => {
         const item = await Item.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true });
         res.status(200).send(item);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 const deleteItem = async (req, res) => {
@@ -39,7 +39,7 @@ const deleteItem = async (req, res) => {
         const item = await Item.findOneAndDelete({ _id: req.params.id });
         res.status(200).send(item);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 

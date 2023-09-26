@@ -25,7 +25,7 @@ const postCollection = async (req, res) => {
         const collection = await Collection.create({ name, tags, user: user._id });
         res.status(201).send(collection);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -43,7 +43,7 @@ const postCollectionImage = async (req, res) => {
         await collection.save();
         res.status(200).send(collection);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -56,7 +56,7 @@ const deleteCollectionImage = async (req, res) => {
         collection.imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
         res.status(200).send(collection);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -72,7 +72,7 @@ const deleteCollection = async (req, res) => {
         }
         res.status(200).send(collection);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -81,7 +81,7 @@ const patchCollection = async (req, res) => {
         const collection = await Collection.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true });
         res.status(200).send(collection);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -89,14 +89,14 @@ const getCollection = async (req, res) => {
     try {
         const collection = await Collection.findById(req.params.id);
         if (!collection) {
-            return res.status(400).send("There is no collection with that id");
+            return res.status(400).send({message:"There is no collection with that id"});
         }
         if (!collection.imageUrl) {
             collection.imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
         }
         res.status(200).send(collection);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 
@@ -111,7 +111,7 @@ const getAllCollections = async (req, res) => {
 
         res.status(200).send(collections);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send({ message: error.message });
     }
 };
 

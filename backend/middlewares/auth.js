@@ -10,7 +10,7 @@ const authMiddleware = function (resource) {
             const isThereParamId = !!req.params.id;
 
             if (!req.cookies.session) {
-                return res.status(401).send("Please log in");
+                return res.status(401).send({ message: "Please log in" });
             }
 
             const userId = jwt.verify(req.cookies.session, process.env.TOKEN_KEY).user_id;
@@ -27,19 +27,19 @@ const authMiddleware = function (resource) {
                     case "collection":
                         const collection = await Collection.findById(req.params.id);
                         if (!collection) {
-                            return res.status(400).send("There is no collection with that id");
+                            return res.status(400).send({ message: "There is no collection with that id" });
                         }
                         ownerId = collection.user;
                 }
                 if (!ownerId.equals(user._id)) {
-                    return res.status(403).send("You are not the owner of that");
+                    return res.status(403).send({ message: "You are not the owner of that" });
                 }
             }
 
             next();
         } catch (error) {
             console.log(error.message);
-            return res.status(400).send(error.message);
+            return res.status(400).send({ message: error.message });
         }
     };
 };
