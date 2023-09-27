@@ -3,9 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../services/backend";
 import { useEffect, useState } from "react";
 import Spinner from "../utility/Spinner";
+import { login as loginReducer } from "../../app/slices/session";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
     const [login, result] = useLoginMutation();
+
+    const { isLoggedIn, username, id } = useSelector((state) => state.session);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -20,13 +25,13 @@ const Login = () => {
         event.preventDefault();
         setError("");
         setResponse(await login({ email, password }));
-        console.log(response);
     };
 
     useEffect(() => {
         if (result.isError) {
             setError(response.error.data.message);
         } else if (result.isSuccess) {
+            dispatch(loginReducer({ id: response.data.id, username: response.data.username, isLoggedIn: true }));
             navigate("/");
         }
     }, [response]);
