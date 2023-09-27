@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeSelector from "./utility/ThemeSelector";
+import { logout } from "../app/slices/session";
+import { useSelector, useDispatch } from "react-redux";
 
 const Menu = () => {
-    const menuLinks = [
-        { to: "/", text: "Home" },
-        { to: "/login", text: "Login" },
-    ];
+    const menuLinks = [{ to: "/", text: "Home" }];
+
+    const navigate = useNavigate();
 
     const [menuContent, setMenuContent] = useState(document.getElementById("menu-content"));
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const isLoggedIn = useSelector((state) => state.session.isLoggedIn);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setMenuContent(document.getElementById("menu-content"));
@@ -49,9 +53,27 @@ const Menu = () => {
                             </Link>
                         );
                     })}
+
                     <div className="w-full p-2 md:px-6 md:h-full md:flex md:items-center md:hover:bg-transparent hover:bg-text/50">
                         <ThemeSelector />
                     </div>
+                    <Link
+                        className={(isLoggedIn ? "hidden" : "") + " p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:flex md:items-center md:px-6"}
+                        onClick={() => {
+                            toggleMenu();
+                        }}
+                        to="/login">
+                        Login
+                    </Link>
+                    <button
+                        className={(isLoggedIn ? "" : "hidden") + " p-2 text-right hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:flex md:items-center md:px-6 "}
+                        onClick={() => {
+                            dispatch(logout());
+                            navigate("/");
+                            toggleMenu();
+                        }}>
+                        Logout
+                    </button>
                 </div>
             </div>
         </>
