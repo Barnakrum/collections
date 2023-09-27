@@ -58,7 +58,7 @@ const Menu = () => {
                         <ThemeSelector />
                     </div>
                     <Link
-                        className={(isLoggedIn ? "hidden" : "") + " p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:flex md:items-center md:px-6"}
+                        className={(isLoggedIn ? "hidden" : "md:flex") + " p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full  md:items-center md:px-6"}
                         onClick={() => {
                             toggleMenu();
                         }}
@@ -66,7 +66,7 @@ const Menu = () => {
                         Login
                     </Link>
                     <button
-                        className={(isLoggedIn ? "" : "hidden") + " p-2 text-right hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:flex md:items-center md:px-6 "}
+                        className={(isLoggedIn ? "md:flex" : "hidden") + " p-2 text-right hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:items-center md:px-6 "}
                         onClick={() => {
                             dispatch(logout());
                             navigate("/");
