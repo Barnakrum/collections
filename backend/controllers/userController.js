@@ -1,7 +1,10 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const transporter = require("../services/transporter");
+
+const cookieExpireTime = 24 * 60 * 60 * 1000;
 
 async function userLogin(req, res) {
     try {
@@ -28,11 +31,26 @@ async function userLogin(req, res) {
         }
 
         const token = User.signJwt(user);
-        res.status(200).cookie("session", token, { secure: true, httpOnly: true, sameSite: "none" }).send({ username: user.username, id: user._id });
+        res.status(200)
+            .cookie("session", token, { httpOnly: true, sameSite: "none", secure: true, maxAge: cookieExpireTime, path: "/" })
+            .cookie("isLoggedIn", "", { httpOnly: false, sameSite: "none", secure: true, maxAge: cookieExpireTime, path: "/" })
+            .send({ username: user.username, id: user._id });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
 }
+
+const userLogout = async (req, res) => {
+    try {
+        if (!req.cookies.session) {
+            return res.status(401).send({ message: "Not logged in" });
+        }
+
+        res.status(200).clearCookie("session").clearCookie("isLoggedIn").send({ message: "Logged out" });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+};
 
 const userRegister = async (req, res) => {
     try {
@@ -96,4 +114,28 @@ const userVerifyEmail = async (req, res) => {
     }
 };
 
-module.exports = { userLogin, userRegister, userVerifyEmail };
+const getRefreshToken = async (req, res) => {
+    try {
+        if (!req.cookies.session) {
+            return res.status(401).send({ message: "Not logged in" });
+        }
+
+        const { email } = await jwt.verify(req.cookies.session, process.env.TOKEN_KEY);
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        const token = User.signJwt(user);
+        res.status(200)
+            .cookie("session", token, { httpOnly: true, sameSite: "none", secure: true, maxAge: cookieExpireTime, path: "/" })
+            .cookie("isLoggedIn", "", { httpOnly: false, sameSite: "none", secure: true, maxAge: cookieExpireTime, path: "/" })
+            .send({ username: user.username, id: user._id });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+};
+
+module.exports = { userLogin, userRegister, userVerifyEmail, getRefreshToken, userLogout };
