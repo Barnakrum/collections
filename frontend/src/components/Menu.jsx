@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import ThemeSelector from "./utility/ThemeSelector";
 import { logout } from "../app/slices/session";
 import { useSelector, useDispatch } from "react-redux";
+import { useLazyLogoutQuery } from "../services/backend";
 
 const Menu = () => {
     const menuLinks = [{ to: "/", text: "Home" }];
+
+    const [triggerLogout] = useLazyLogoutQuery();
 
     const navigate = useNavigate();
 
@@ -69,6 +72,7 @@ const Menu = () => {
                         className={(isLoggedIn ? "md:flex" : "hidden") + " p-2 text-right hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:items-center md:px-6 "}
                         onClick={() => {
                             dispatch(logout());
+                            triggerLogout();
                             navigate("/");
                             toggleMenu();
                         }}>
