@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../services/backend";
 import { useEffect, useState } from "react";
 import Spinner from "../utility/Spinner";
-import { login as loginReducer } from "../../app/slices/session";
+import { login as loginReducer } from "../../App/slices/session";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
