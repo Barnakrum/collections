@@ -13,7 +13,7 @@ const authMiddleware = function (resource) {
                 return res.status(401).send({ message: "Please log in" });
             }
 
-            const userId = jwt.verify(req.cookies.session, process.env.TOKEN_KEY).user_id;
+            const userId = await jwt.verify(req.cookies.session, process.env.TOKEN_KEY).user_id;
             const user = await User.findById(userId);
             req.user = user;
 
