@@ -15,6 +15,13 @@ export const backendApi = createApi({
                 credentials: "include",
             }),
         }),
+        logout: builder.query({
+            query: () => ({
+                url: "user/logout",
+                method: "GET",
+                credentials: "include",
+            }),
+        }),
         register: builder.mutation({
             query: (payload) => ({
                 url: "/user/register",
@@ -32,7 +39,14 @@ export const backendApi = createApi({
                 method: "GET",
             }),
         }),
+        getRefreshToken: builder.query({
+            query: () => ({
+                url: "user/get-refresh-token",
+                method: "GET",
+                credentials: "include",
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useVerifyQuery } = backendApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery } = backendApi;
