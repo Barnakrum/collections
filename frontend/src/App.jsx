@@ -4,6 +4,7 @@ import routes from "./utilities/routes";
 import ThemeSelector from "./components/utility/ThemeSelector";
 import Topbar from "./components/Topbar";
 import Menu from "./components/Menu";
+import DisplayUser from "./components/auth/DisplayUser";
 
 function App() {
     return (
@@ -13,7 +14,10 @@ function App() {
                     <header className="w-full">
                         <Topbar>
                             <div>Logo/Name</div>
-                            <Menu />
+                            <div className="flex items-center gap-4">
+                                <DisplayUser />
+                                <Menu />
+                            </div>
                         </Topbar>
                     </header>
                     <main className="flex-grow w-full h-10">
