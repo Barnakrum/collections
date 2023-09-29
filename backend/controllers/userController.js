@@ -71,7 +71,9 @@ const userRegister = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const emailVerifyHash = await bcrypt.hash(username + email + process.env.TOKEN_KEY, 10);
+        let emailVerifyHash = await bcrypt.hash(username + email + process.env.TOKEN_KEY, 10);
+
+        emailVerifyHash = emailVerifyHash.replaceAll("/", "_");
 
         const linkForVerification = `${process.env.FRONTEND_ORIGIN}/verify-email/${encodeURIComponent(`${emailVerifyHash}`)}/${email}/`;
 
@@ -101,7 +103,10 @@ const userVerifyEmail = async (req, res) => {
             return res.status(400).send({ message: "Your email is already verifed" });
         }
 
-        const isHashCorrect = await bcrypt.compare(user.username + req.params.email + process.env.TOKEN_KEY, decodeURIComponent(req.params.token));
+        let hashFromRequest = decodeURIComponent(req.params.token);
+        hashFromRequest = hashFromRequest.replaceAll("_", "/");
+
+        const isHashCorrect = await bcrypt.compare(user.username + req.params.email + process.env.TOKEN_KEY, hashFromRequest);
         if (isHashCorrect) {
             user.isEmailVerifed = true;
             await user.save();
