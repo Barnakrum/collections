@@ -20,7 +20,7 @@ function App() {
                             </div>
                         </Topbar>
                     </header>
-                    <main className="w-full mx-auto md:w-5/6">
+                    <main className="flex-auto w-full mx-auto md:w-5/6">
                         <Routes>
                             <Route path="/" index element={<Home />} />
                             {routes.map((route, index) => (
