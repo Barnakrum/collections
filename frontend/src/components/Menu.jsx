@@ -87,12 +87,6 @@ const Menu = () => {
                     <div className="w-full p-2 md:px-6 md:h-full md:flex md:items-center md:hover:bg-transparent hover:bg-text/50">
                         <ThemeSelector />
                     </div>
-                    <button
-                        onClick={() => {
-                            console.log(menuLinks);
-                        }}>
-                        conosle
-                    </button>
                 </div>
             </div>
         </>
