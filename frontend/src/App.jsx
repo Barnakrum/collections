@@ -10,7 +10,7 @@ function App() {
     return (
         <>
             <BrowserRouter>
-                <div className="flex flex-col justify-around h-screen p-0 text-text bg-background">
+                <div className="flex flex-col justify-between h-full p-0 overflow-y-auto text-text bg-background">
                     <header className="w-full">
                         <Topbar>
                             <div>Logo/Name</div>
@@ -20,7 +20,7 @@ function App() {
                             </div>
                         </Topbar>
                     </header>
-                    <main className="flex-grow w-full h-10">
+                    <main className="w-full mx-auto md:w-5/6">
                         <Routes>
                             <Route path="/" index element={<Home />} />
                             {routes.map((route, index) => (
