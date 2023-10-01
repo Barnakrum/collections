@@ -69,7 +69,7 @@ const Menu = () => {
                 <div className="flex flex-col w-full h-full text-2xl text-right bg-text/20 md:flex-row md:items-center md:bg-transparent md:text-lg">
                     {menuLinks.map((link, index) => {
                         return link === "" ? (
-                            <></>
+                            <div className="hidden" key={index}></div>
                         ) : (
                             <Link
                                 className="p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:flex md:items-center md:px-6 "
