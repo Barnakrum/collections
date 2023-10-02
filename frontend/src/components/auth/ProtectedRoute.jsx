@@ -1,17 +1,20 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import Spinner from "../utility/Spinner";
 
 const ProtectedRoute = ({ children }) => {
     const isLoggedIn = useSelector((state) => state.session.isLoggedIn);
 
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate("/");
-        }
-    });
+    if (isLoggedIn === undefined) {
+        return (
+            <div className="text-primary">
+                <Spinner />
+            </div>
+        );
+    }
+    if (!isLoggedIn) {
+        return <Navigate to={"/"} />;
+    }
 
     return <>{children}</>;
 };
