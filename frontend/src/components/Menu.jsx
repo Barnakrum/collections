@@ -13,7 +13,7 @@ const Menu = () => {
         isLoggedIn
             ? {
                   to: "/",
-                  text: "Logout",
+                  text: <span className="material-symbols-outlined">person_remove</span>,
                   callback: () => {
                       dispatch(logout());
                       triggerLogout();
@@ -22,8 +22,9 @@ const Menu = () => {
               }
             : {
                   to: "/login",
-                  text: "Login",
+                  text: <span className="material-symbols-outlined">person_add</span>,
                   callback: () => {},
+                  order: "10",
               },
         isLoggedIn
             ? {
@@ -73,7 +74,7 @@ const Menu = () => {
                             <div className="hidden" key={index}></div>
                         ) : (
                             <Link
-                                className={`p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full  md:flex md:items-center md:px-6 order-${link.order || "none"}`}
+                                className={`p-2 hover:bg-text/50 min-w-fit md:hover:bg-transparent md:hover:text-primary md:h-full  md:flex md:items-center md:px-6 order-${link.order || "none"}`}
                                 onClick={() => {
                                     link.callback();
                                     toggleMenu();
