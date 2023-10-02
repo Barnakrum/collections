@@ -18,6 +18,7 @@ const Menu = () => {
                       dispatch(logout());
                       triggerLogout();
                   },
+                  order: "10",
               }
             : {
                   to: "/login",
@@ -72,7 +73,7 @@ const Menu = () => {
                             <div className="hidden" key={index}></div>
                         ) : (
                             <Link
-                                className="p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full md:flex md:items-center md:px-6 "
+                                className={`p-2 hover:bg-text/50 md:hover:bg-transparent md:hover:text-primary md:h-full  md:flex md:items-center md:px-6 order-${link.order || "none"}`}
                                 onClick={() => {
                                     link.callback();
                                     toggleMenu();
@@ -84,7 +85,7 @@ const Menu = () => {
                         );
                     })}
 
-                    <div className="w-full p-2 md:px-6 md:h-full md:flex md:items-center md:hover:bg-transparent hover:bg-text/50">
+                    <div className="order-9 w-full p-2 md:px-6 md:h-full md:flex md:items-center md:hover:bg-transparent hover:bg-text/50">
                         <ThemeSelector />
                     </div>
                 </div>
