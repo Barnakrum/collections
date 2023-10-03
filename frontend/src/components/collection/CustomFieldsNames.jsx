@@ -31,6 +31,7 @@ const CustomFieldsNames = ({ setFields, fields, name }) => {
                         placeholder={field}
                     />
                     <button
+                        type="button"
                         onClick={() => {
                             setFields(fields.filter((f, i) => i !== index));
                         }}>
