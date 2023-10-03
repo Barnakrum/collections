@@ -41,7 +41,7 @@ const Register = () => {
                 onSubmit={(event) => {
                     handleRegister(event);
                 }}
-                className="flex flex-col max-w-lg gap-4 p-4 m-auto text-xl border rounded-lg bg-text/5 border-text/30">
+                className="flex flex-col max-w-[80%] md:max-w-lg gap-4 p-4 m-auto text-xl border rounded-lg bg-text/5 border-text/30">
                 <div className="text-3xl text-center text-primary">Register</div>
                 <div className="flex flex-col gap-4">
                     <input

@@ -38,7 +38,7 @@ const Login = () => {
 
     return (
         <>
-            <form onSubmit={(event) => handleLogin(event)} className="flex flex-col max-w-lg gap-4 p-4 m-auto text-xl border rounded-lg bg-text/5 border-text/30">
+            <form onSubmit={(event) => handleLogin(event)} className="flex flex-col gap-4 p-4 m-auto text-xl border rounded-lg max-w-[80%] md:max-w-lg bg-text/5 border-text/30">
                 <div className="text-3xl text-center text-primary">Login</div>
                 <div className="flex flex-col gap-4">
                     <input
