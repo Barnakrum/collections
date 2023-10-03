@@ -46,7 +46,18 @@ export const backendApi = createApi({
                 credentials: "include",
             }),
         }),
+        postCollection: builder.mutation({
+            query: (payload) => ({
+                url: "/collection/",
+                method: "POST",
+                body: payload,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                credentials: "include",
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery } = backendApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation } = backendApi;
