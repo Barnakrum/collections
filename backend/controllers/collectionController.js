@@ -18,11 +18,11 @@ const User = require("../models/userModel");
 const Item = require("../models/itemModel");
 
 const postCollection = async (req, res) => {
-    const { name, tags } = req.body;
+    const { name, tags, stringFieldsNames, numberFieldsNames, dateFieldsNames, booleanFieldsNames, colorFieldsNames } = req.body;
     const { user } = req;
 
     try {
-        const collection = await Collection.create({ name, tags, user: user._id });
+        const collection = await Collection.create({ name, tags, user: user._id, stringFieldsNames, numberFieldsNames, dateFieldsNames, booleanFieldsNames, colorFieldsNames });
         res.status(201).send(collection);
     } catch (error) {
         res.status(400).send({ message: error.message });
@@ -89,7 +89,7 @@ const getCollection = async (req, res) => {
     try {
         const collection = await Collection.findById(req.params.id);
         if (!collection) {
-            return res.status(400).send({message:"There is no collection with that id"});
+            return res.status(400).send({ message: "There is no collection with that id" });
         }
         if (!collection.imageUrl) {
             collection.imageUrl = process.env.PLACEHOLDER_IMAGE_URL;
