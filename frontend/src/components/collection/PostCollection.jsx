@@ -2,6 +2,7 @@ import { useState } from "react";
 import CustomFieldsNames from "./CustomFieldsNames";
 
 const PostCollection = () => {
+    const [collectionName, setCollectionName] = useState("");
     const [tags, setTags] = useState([]);
 
     const [textFields, setTextFields] = useState([]);
@@ -23,7 +24,16 @@ const PostCollection = () => {
             }}>
             <h1 className="text-3xl text-center text-primary">Add Collection</h1>
             <div className="flex flex-col gap-2 p-4">
-                <input type="text" name="name" id="" placeholder="Name" />
+                <input
+                    type="text"
+                    name="name"
+                    id=""
+                    onChange={(event) => {
+                        setCollectionName(event.target.value);
+                    }}
+                    value={collectionName}
+                    placeholder="Name"
+                />
                 <div className="flex flex-col text-sm">
                     <div className="flex flex-row flex-wrap gap-x-2">
                         {tags.map((tag, index) => (
