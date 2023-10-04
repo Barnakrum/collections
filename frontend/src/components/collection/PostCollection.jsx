@@ -14,6 +14,8 @@ const PostCollection = () => {
     const [dateFields, setDateFields] = useState([]);
     const [numberFields, setNumberFields] = useState([]);
 
+    const [error, setError] = useState("");
+
     const [postCollection, postCollectionResult] = usePostCollectionMutation();
 
     const [response, setResponse] = useState({});
@@ -32,8 +34,9 @@ const PostCollection = () => {
 
     useEffect(() => {
         if (postCollectionResult.isSuccess) {
-            console.log(response);
             navigate(`/collection/${response.data._id}`);
+        } else if (postCollectionResult.isError) {
+            setError(response.error.data.message);
         }
     }, [response]);
 
@@ -104,6 +107,7 @@ const PostCollection = () => {
                     <CustomFieldsNames setFields={setDateFields} fields={dateFields} name={"date fields"} />
                 </div>
             </div>
+            <div className={`text-error ${postCollectionResult.isError ? "" : "hidden"}`}>{error}</div>
             <button disabled={postCollectionResult.isLoading} className="rounded-lg form-button bg-primary">
                 {postCollectionResult.isLoading ? <Spinner /> : "Submit"}
             </button>
