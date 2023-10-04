@@ -7,7 +7,7 @@ const DisplayFieldsNames = ({ fields, name }) => {
 
             <div className="flex ">
                 {fields.map((field, index) => (
-                    <div key={index} className="px-2 border-l-2 first:border-l-0 text-text/60">
+                    <div key={index} className="px-2 border-l-2 border-text/10 first:border-l-0 text-text/80">
                         {field}
                     </div>
                 ))}
