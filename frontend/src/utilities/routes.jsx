@@ -6,6 +6,7 @@ import Register from "../components/auth/Register";
 import RegisterSucess from "../components/auth/RegisterSucess";
 import VerifyEmail from "../components/auth/VerifyEmail";
 import PostCollection from "../components/collection/PostCollection";
+import CollectionPage from "../components/collection/CollectionPage";
 
 const routes = [
     {
@@ -36,6 +37,10 @@ const routes = [
                 <PostCollection />
             </ProtectedRoute>
         ),
+    },
+    {
+        path: "/collection/:id",
+        element: <CollectionPage />,
     },
 ];
 
