@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CustomFieldsNames from "./CustomFieldsNames";
 import { usePostCollectionMutation } from "../../services/backend";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../utility/Spinner";
 
 const PostCollection = () => {
     const [collectionName, setCollectionName] = useState("");
@@ -97,7 +98,9 @@ const PostCollection = () => {
                     <CustomFieldsNames setFields={setDateFields} fields={dateFields} name={"date fields"} />
                 </div>
             </div>
-            <button className="rounded-lg form-button bg-primary">Submit</button>
+            <button disabled={postCollectionResult.isLoading} className="rounded-lg form-button bg-primary">
+                {postCollectionResult.isLoading ? <Spinner /> : "Submit"}
+            </button>
         </form>
     );
 };
