@@ -20,6 +20,9 @@ const Item = require("../models/itemModel");
 const postCollection = async (req, res) => {
     const { name, tags, stringFieldsNames, numberFieldsNames, dateFieldsNames, booleanFieldsNames, colorFieldsNames } = req.body;
     const { user } = req;
+    if (!name) {
+        return res.status(400).send({ message: "Please provide name for your collection" });
+    }
 
     try {
         const collection = await Collection.create({ name, tags, user: user._id, stringFieldsNames, numberFieldsNames, dateFieldsNames, booleanFieldsNames, colorFieldsNames });
