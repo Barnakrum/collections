@@ -57,7 +57,13 @@ export const backendApi = createApi({
                 credentials: "include",
             }),
         }),
+        getCollection: builder.query({
+            query: (id) => ({
+                url: "/collection/" + id,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation } = backendApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation, useGetCollectionQuery } = backendApi;
