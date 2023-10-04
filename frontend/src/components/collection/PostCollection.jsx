@@ -21,7 +21,13 @@ const PostCollection = () => {
     const navigate = useNavigate();
 
     const handlePostCollection = async () => {
-        setResponse(await postCollection({ name: collectionName, tags, stringFieldsNames: textFields, booleanFieldsNames: booleanFields, colorFieldsNames: colorFields, dateFieldsNames: dateFields, numberFieldsNames: numberFields }));
+        const stringFieldsNames = textFields.filter((t) => typeof t === "string");
+        const booleanFieldsNames = booleanFields.filter((t) => typeof t === "string");
+        const colorFieldsNames = colorFields.filter((t) => typeof t === "string");
+        const dateFieldsNames = dateFields.filter((t) => typeof t === "string");
+        const numberFieldsNames = numberFields.filter((t) => typeof t === "string");
+
+        setResponse(await postCollection({ name: collectionName, tags, stringFieldsNames, booleanFieldsNames, colorFieldsNames, dateFieldsNames, numberFieldsNames }));
     };
 
     useEffect(() => {
