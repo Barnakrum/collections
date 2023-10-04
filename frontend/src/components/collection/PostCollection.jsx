@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomFieldsNames from "./CustomFieldsNames";
+import { usePostCollectionMutation } from "../../services/backend";
+import { useNavigate } from "react-router-dom";
 
 const PostCollection = () => {
     const [collectionName, setCollectionName] = useState("");
@@ -11,6 +13,23 @@ const PostCollection = () => {
     const [dateFields, setDateFields] = useState([]);
     const [numberFields, setNumberFields] = useState([]);
 
+    const [postCollection, postCollectionResult] = usePostCollectionMutation();
+
+    const [response, setResponse] = useState({});
+
+    const navigate = useNavigate();
+
+    const handlePostCollection = async () => {
+        setResponse(await postCollection({ name: collectionName, tags, stringFieldsNames: textFields, booleanFieldsNames: booleanFields, colorFieldsNames: colorFields, dateFieldsNames: dateFields, numberFieldsNames: numberFields }));
+    };
+
+    useEffect(() => {
+        if (postCollectionResult.isSuccess) {
+            console.log(response);
+            navigate(`/collection/${response.data._id}`);
+        }
+    }, [response]);
+
     return (
         <form
             className="flex flex-col max-w-[80%] md:max-w-lg gap-4 p-4 m-auto text-xl border rounded-lg  bg-text/5 border-text/30"
@@ -19,7 +38,7 @@ const PostCollection = () => {
                 if (document.activeElement.id === "tags") {
                     return;
                 } else {
-                    //submit logic here
+                    handlePostCollection();
                 }
             }}>
             <h1 className="text-3xl text-center text-primary">Add Collection</h1>
@@ -78,9 +97,7 @@ const PostCollection = () => {
                     <CustomFieldsNames setFields={setDateFields} fields={dateFields} name={"date fields"} />
                 </div>
             </div>
-            <button type="submit" className="rounded-lg form-button bg-primary">
-                Submit
-            </button>
+            <button className="rounded-lg form-button bg-primary">Submit</button>
         </form>
     );
 };
