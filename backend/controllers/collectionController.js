@@ -38,7 +38,7 @@ const postCollectionImage = async (req, res) => {
         const imagePath = "./imagesForUpload/" + collection._id + req.fileExtension;
 
         if (!!collection.imageUrl) cloudinary.uploader.destroy(collection._id);
-        const result = await cloudinary.uploader.upload(imagePath, { public_id: collection._id });
+        const result = await cloudinary.uploader.upload(imagePath, { public_id: collection._id, width: 1280, height: 720, crop: "scale" });
         collection.imageUrl = result.secure_url;
 
         await fs.promises.unlink(imagePath);
