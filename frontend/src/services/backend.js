@@ -57,6 +57,24 @@ export const backendApi = createApi({
                 credentials: "include",
             }),
         }),
+        postCollectionImage: builder.mutation({
+            query: ({ id, payload }) => {
+                return {
+                    url: "/collection/" + id + "/image",
+                    method: "POST",
+                    body: payload,
+                    credentials: "include",
+                    formData: true,
+                };
+            },
+        }),
+        deleteCollectionImage: builder.mutation({
+            query: (id) => ({
+                url: "/collection/" + id + "/image",
+                method: "DELETE",
+                credentials: "include",
+            }),
+        }),
         getCollection: builder.query({
             query: (id) => ({
                 url: "/collection/" + id,
@@ -66,4 +84,4 @@ export const backendApi = createApi({
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation, useGetCollectionQuery } = backendApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation, useGetCollectionQuery, usePostCollectionImageMutation, useDeleteCollectionImageMutation } = backendApi;
