@@ -4,6 +4,7 @@ export const backendApi = createApi({
     reducerPath: "backend",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api" }),
     endpoints: (builder) => ({
+        //AUTH
         login: builder.mutation({
             query: (payload) => ({
                 url: "/user/login",
@@ -46,6 +47,7 @@ export const backendApi = createApi({
                 credentials: "include",
             }),
         }),
+        //COLLECTIONS
         postCollection: builder.mutation({
             query: (payload) => ({
                 url: "/collection/",
@@ -81,7 +83,15 @@ export const backendApi = createApi({
                 method: "GET",
             }),
         }),
+        //USER
+        getUser: builder.query({
+            query: (id) => ({
+                url: "/user/" + id,
+                method: "GET",
+            }),
+        }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation, useGetCollectionQuery, usePostCollectionImageMutation, useDeleteCollectionImageMutation } = backendApi;
+export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation, useGetCollectionQuery, usePostCollectionImageMutation, useDeleteCollectionImageMutation, useGetUserQuery } =
+    backendApi;
