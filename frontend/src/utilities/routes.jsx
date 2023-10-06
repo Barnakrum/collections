@@ -7,6 +7,7 @@ import RegisterSucess from "../components/auth/RegisterSucess";
 import VerifyEmail from "../components/auth/VerifyEmail";
 import PostCollection from "../components/collection/PostCollection";
 import CollectionPage from "../components/collection/CollectionPage";
+import PostCollectionImage from "../components/collection/PostCollectionImage";
 
 const routes = [
     {
@@ -41,6 +42,10 @@ const routes = [
     {
         path: "/collection/:id",
         element: <CollectionPage />,
+    },
+    {
+        path: "collection/postImage/:id",
+        element: <PostCollectionImage />,
     },
 ];
 
