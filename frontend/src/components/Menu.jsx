@@ -66,7 +66,7 @@ const Menu = () => {
                 id="menu-content"
                 className={
                     (isMenuOpen ? "" : "translate-x-full") +
-                    " bg-background right-0 ease-linear transition-transform absolute top-[var(--topbar-height)] h-[calc(100%-var(--topbar-height))] w-[70%]  md:visible md:static md:right-0 md:top-0 md:-m-4  md:h-[var(--topbar-height)] md:translate-x-0 md:w-fit md:bg-transparent"
+                    " z-40 bg-background right-0 ease-linear transition-transform absolute top-[var(--topbar-height)] h-[calc(100%-var(--topbar-height))] w-[70%]  md:visible md:static md:right-0 md:top-0 md:-m-4  md:h-[var(--topbar-height)] md:translate-x-0 md:w-fit md:bg-transparent"
                 }>
                 <div className="flex flex-col w-full h-full text-2xl text-right bg-text/20 md:flex-row md:items-center md:bg-transparent md:text-lg">
                     {menuLinks.map((link, index) => {
