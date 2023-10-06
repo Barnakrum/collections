@@ -1,13 +1,24 @@
-import { Link, useParams } from "react-router-dom";
-import { useGetCollectionQuery } from "../../services/backend";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDeleteCollectionImageMutation, useGetCollectionQuery } from "../../services/backend";
 import Spinner from "../utility/Spinner";
 import DisplayFieldsNames from "./DisplayFieldsNames";
 import { useState } from "react";
 
 const CollectionPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const { data, error, isError, isUninitialized, isLoading } = useGetCollectionQuery(id);
+
+    const [useDeleteImage, useDeleteImageResult] = useDeleteCollectionImageMutation();
+
+    const handleDelete = async () => {
+        const response = await useDeleteImage(id);
+        if (useDeleteImageResult.isError) {
+        } else {
+            navigate(0);
+        }
+    };
 
     if (isUninitialized || isLoading) {
         return <Spinner />;
@@ -26,7 +37,11 @@ const CollectionPage = () => {
                         <Link to={"/collection/postImage/" + data._id} className="absolute flex justify-center p-2 border-2 rounded-3xl bg-transparent/80 right-2 top-2 md:right-4 md:top-4 hover:bg-transparent border-secondary text-secondary">
                             <span className="material-symbols-outlined">edit</span>
                         </Link>
-                        <button className="absolute flex justify-center p-2 border-2 rounded-3xl bg-transparent/80 right-2 bottom-2 md:right-4 md:bottom-4 hover:bg-transparent border-error text-error">
+                        <button
+                            onClick={() => {
+                                handleDelete();
+                            }}
+                            className="absolute flex justify-center p-2 border-2 rounded-3xl bg-transparent/80 right-2 bottom-2 md:right-4 md:bottom-4 hover:bg-transparent border-error text-error">
                             <span className="material-symbols-outlined">delete_forever</span>
                         </button>
                     </div>
