@@ -83,6 +83,16 @@ export const backendApi = createApi({
                 method: "GET",
             }),
         }),
+        getAllColections: builder.query({
+            query: (arg) => {
+                const { user } = arg;
+
+                return {
+                    url: "/collection",
+                    params: { user },
+                };
+            },
+        }),
         //USER
         getUser: builder.query({
             query: (id) => ({
@@ -93,5 +103,17 @@ export const backendApi = createApi({
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useVerifyQuery, useGetRefreshTokenQuery, useLazyLogoutQuery, usePostCollectionMutation, useGetCollectionQuery, usePostCollectionImageMutation, useDeleteCollectionImageMutation, useGetUserQuery } =
-    backendApi;
+export const {
+    useLoginMutation,
+    useRegisterMutation,
+    useVerifyQuery,
+    useGetRefreshTokenQuery,
+    useLazyLogoutQuery,
+    usePostCollectionMutation,
+    useGetCollectionQuery,
+    usePostCollectionImageMutation,
+    useDeleteCollectionImageMutation,
+    useGetUserQuery,
+    useLazyGetUserQuery,
+    useGetAllColectionsQuery,
+} = backendApi;
