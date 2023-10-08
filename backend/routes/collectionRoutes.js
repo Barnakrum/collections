@@ -4,15 +4,7 @@ const verifyMongoId = require("../middlewares/verifyMongoId");
 
 const path = require("path");
 const multer = require("multer");
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "imagesForUpload/");
-    },
-    filename: function (req, file, cb) {
-        cb(null, req.params.id + path.extname(file.originalname));
-        req.fileExtension = path.extname(file.originalname);
-    },
-});
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const { postCollection, getAllCollections, getCollection, patchCollection, deleteCollection, postCollectionImage, deleteCollectionImage } = require("../controllers/collectionController");
