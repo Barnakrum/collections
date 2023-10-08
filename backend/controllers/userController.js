@@ -45,8 +45,11 @@ const userLogout = async (req, res) => {
         if (!req.cookies.session) {
             return res.status(401).send({ message: "Not logged in" });
         }
-
-        res.status(200).clearCookie("session", { sameSite: "strict" }).clearCookie("isLoggedIn", { sameSite: "strict" }).send({ message: "Logged out" });
+        if (process.env.ENV === "DEVELOPMENT") {
+            res.status(200).clearCookie("session", { sameSite: "strict" }).clearCookie("isLoggedIn", { sameSite: "strict" }).send({ message: "Logged out" });
+        } else {
+            res.status(200).clearCookie("session", { secure: true }).clearCookie("isLoggedIn", { secure: true }).send({ message: "Logged out" });
+        }
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
