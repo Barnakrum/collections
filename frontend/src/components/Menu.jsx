@@ -7,6 +7,7 @@ import { useLazyLogoutQuery } from "../services/backend";
 
 const Menu = () => {
     const isLoggedIn = useSelector((state) => state.session.isLoggedIn);
+    const userId = useSelector((state) => state.session.id);
 
     const menuLinks = [
         { to: "/", text: "Home", callback: () => {} },
@@ -30,6 +31,13 @@ const Menu = () => {
             ? {
                   to: "/collection/post",
                   text: "Add collection",
+                  callback: () => {},
+              }
+            : "",
+        isLoggedIn
+            ? {
+                  to: "/user/" + userId,
+                  text: "My profile",
                   callback: () => {},
               }
             : "",
