@@ -143,4 +143,17 @@ const getRefreshToken = async (req, res) => {
     }
 };
 
-module.exports = { userLogin, userRegister, userVerifyEmail, getRefreshToken, userLogout };
+const getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        res.status(200).send({ username: user.username, isAdmin: user.isAdmin, id: user._id });
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+};
+
+module.exports = { userLogin, userRegister, userVerifyEmail, getRefreshToken, userLogout, getUser };
