@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useDeleteCollectionImageMutation, useGetCollectionQuery } from "../../services/backend";
+import { useDeleteCollectionImageMutation, useGetCollectionQuery, useGetUserQuery } from "../../services/backend";
 import Spinner from "../utility/Spinner";
 import DisplayFieldsNames from "./DisplayFieldsNames";
 import { useState } from "react";
@@ -8,7 +8,8 @@ const CollectionPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { data, error, isError, isUninitialized, isLoading } = useGetCollectionQuery(id);
+    const { data, error, isError, isUninitialized, isLoading, isSuccess } = useGetCollectionQuery(id);
+    const { data: user, isSuccess: userIsSuccess } = useGetUserQuery(isSuccess ? data.user : { skip: true });
 
     const [useDeleteImage, useDeleteImageResult] = useDeleteCollectionImageMutation();
 
@@ -45,7 +46,7 @@ const CollectionPage = () => {
                             <span className="material-symbols-outlined">delete_forever</span>
                         </button>
                     </div>
-                    <div className="p-3 m-auto bg-text/10 rounded-b-3xl md:max-w-xl">
+                    <div className="flex flex-col p-3 m-auto bg-text/10 rounded-b-3xl md:max-w-xl">
                         <div className="flex gap-2">
                             {data.tags.map((tag, index) => (
                                 <div className="text-secondary" key={index}>
@@ -53,6 +54,16 @@ const CollectionPage = () => {
                                 </div>
                             ))}
                         </div>
+                        {userIsSuccess ? (
+                            <div className="flex gap-1">
+                                Owner:
+                                <Link className="underline" to={"/user/" + user.id}>
+                                    {user.username}
+                                </Link>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </div>
                 <DisplayFieldsNames fields={data.stringFieldsNames} name={"text fields"} />
