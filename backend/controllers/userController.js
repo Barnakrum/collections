@@ -73,7 +73,7 @@ const userRegister = async (req, res) => {
 
         let emailVerifyHash = await bcrypt.hash(username + email + process.env.TOKEN_KEY, 10);
 
-        emailVerifyHash = emailVerifyHash.replaceAll("/", "_");
+        emailVerifyHash = emailVerifyHash.replace(/\//g, "-");
 
         const linkForVerification = `${process.env.FRONTEND_ORIGIN}/verify-email/${encodeURIComponent(`${emailVerifyHash}`)}/${email}/`;
 
@@ -104,7 +104,7 @@ const userVerifyEmail = async (req, res) => {
         }
 
         let hashFromRequest = decodeURIComponent(req.params.token);
-        hashFromRequest = hashFromRequest.replaceAll("_", "/");
+        hashFromRequest = hashFromRequest.replace(/\//g, "-");
 
         const isHashCorrect = await bcrypt.compare(user.username + req.params.email + process.env.TOKEN_KEY, hashFromRequest);
         if (isHashCorrect) {
