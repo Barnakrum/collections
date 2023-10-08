@@ -19,13 +19,11 @@ const Menu = () => {
                       dispatch(logout());
                       triggerLogout();
                   },
-                  order: "10",
               }
             : {
                   to: "/login",
                   text: <span className="material-symbols-outlined">person_add</span>,
                   callback: () => {},
-                  order: "10",
               },
         isLoggedIn
             ? {
@@ -82,7 +80,7 @@ const Menu = () => {
                             <div className="hidden" key={index}></div>
                         ) : (
                             <Link
-                                className={`p-2 hover:bg-text/50 min-w-fit md:hover:bg-transparent md:hover:text-primary md:h-full  md:flex md:items-center md:px-6 order-${link.order || "none"}`}
+                                className={`p-2 hover:bg-text/50 min-w-fit md:hover:bg-transparent md:hover:text-primary md:h-full  md:flex md:items-center md:px-6`}
                                 onClick={() => {
                                     link.callback();
                                     toggleMenu();
@@ -94,7 +92,7 @@ const Menu = () => {
                         );
                     })}
 
-                    <div className="order-9 w-full p-2 md:px-6 md:h-full md:flex md:items-center md:hover:bg-transparent hover:bg-text/50">
+                    <div className="w-full p-2  md:px-6 md:h-full md:flex md:items-center md:hover:bg-transparent hover:bg-text/50">
                         <ThemeSelector />
                     </div>
                 </div>
