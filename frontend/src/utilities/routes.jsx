@@ -8,8 +8,10 @@ import VerifyEmail from "../components/auth/VerifyEmail";
 import PostCollection from "../components/collection/PostCollection";
 import CollectionPage from "../components/collection/CollectionPage";
 import PostCollectionImage from "../components/collection/PostCollectionImage";
+import UserProfile from "../components/user/UserProfile";
 
 const routes = [
+    //auth
     {
         path: "/",
         index: true,
@@ -39,6 +41,7 @@ const routes = [
             </ProtectedRoute>
         ),
     },
+    //collections
     {
         path: "/collection/:id",
         element: <CollectionPage />,
@@ -46,6 +49,11 @@ const routes = [
     {
         path: "collection/postImage/:id",
         element: <PostCollectionImage />,
+    },
+    //user
+    {
+        path: "/user/:id",
+        element: <UserProfile />,
     },
 ];
 
