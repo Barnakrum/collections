@@ -35,15 +35,16 @@ const postCollection = async (req, res) => {
 const postCollectionImage = async (req, res) => {
     try {
         const collection = await Collection.findById({ _id: req.params.id });
-        const imagePath = "./imagesForUpload/" + collection._id + req.fileExtension;
+
+        const b64 = Buffer.from(req.file.buffer).toString("base64");
+        let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
 
         if (!!collection.imageUrl) cloudinary.uploader.destroy(collection._id);
-        const result = await cloudinary.uploader.upload(imagePath, { public_id: collection._id, width: 1280, height: 720, crop: "scale" });
+        const result = await cloudinary.uploader.upload(dataURI, { public_id: collection._id, width: 1280, height: 720, crop: "scale" });
         collection.imageUrl = result.secure_url;
 
-        await fs.promises.unlink(imagePath);
-
         await collection.save();
+
         res.status(200).send(collection);
     } catch (error) {
         res.status(400).send({ message: error.message });
