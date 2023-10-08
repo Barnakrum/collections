@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ThemeSelector from "./utility/ThemeSelector";
-import { logout } from "../app/slices/session";
+import { logout } from "../appState/slices/session";
 import { useSelector, useDispatch } from "react-redux";
 import { useLazyLogoutQuery } from "../services/backend";
 

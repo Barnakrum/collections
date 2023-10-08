@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useGetRefreshTokenQuery, useLazyLogoutQuery } from "../../services/backend";
-import { login, logout } from "../../App/slices/session";
+import { login, logout } from "../../appState/slices/session";
 
 const DisplayUser = () => {
     const { username, isLoggedIn } = useSelector((state) => state.session);
