@@ -75,7 +75,9 @@ const PostItem = () => {
             <FieldNames data={data.colorFieldsNames} fields={colorFields} setFields={setColorFields} defaultValue="#ff00ff" inputType="color" />
             <FieldNames data={data.numberFieldsNames} fields={numberFields} setFields={setNumberFields} inputType="number" />
             <FieldNames data={data.dateFieldsNames} fields={dateFields} setFields={setDateFields} inputType="datetime-local" />
-            <button className="rounded-md form-button bg-primary">Submit</button>
+            <button disabled={postItemResult.isLoading} className="rounded-md form-button bg-primary">
+                {postItemResult.isLoading ? <Spinner /> : "Submit"}
+            </button>
         </form>
     );
 };
