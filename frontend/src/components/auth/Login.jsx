@@ -31,7 +31,7 @@ const Login = () => {
         if (result.isError) {
             setError(response.error.data.message);
         } else if (result.isSuccess) {
-            dispatch(loginReducer({ id: response.data.id, username: response.data.username, isLoggedIn: true }));
+            dispatch(loginReducer({ id: response.data.id, username: response.data.username, isLoggedIn: true, isAdmin: response.data.isAdmin }));
             navigate("/");
         }
     }, [response]);
