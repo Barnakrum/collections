@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetCollectionQuery, usePostItemMutation } from "../../services/backend";
 import Spinner from "../utility/Spinner";
 import { useEffect, useState } from "react";
@@ -8,6 +8,9 @@ const PostItem = () => {
     const { data, isLoading, isSuccess, isError, error } = useGetCollectionQuery(id);
 
     const [postItem, postItemResult] = usePostItemMutation();
+    const [postItemResponse, setPostItemResponse] = useState({});
+
+    const navigate = useNavigate();
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -21,15 +24,25 @@ const PostItem = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const item = { name, description, stringFields, booleanFields, numberFields, dateFields, colorFields };
-        const response = await postItem({ id, payload: item });
+        setPostItemResponse(await postItem({ id, payload: item }));
     };
+
+    useEffect(() => {
+        if (postItemResult.isSuccess) {
+            navigate("/item/" + postItemResponse.data._id);
+        }
+    }, [postItemResponse]);
 
     if (isLoading) {
         return <Spinner />;
-    } else if (isError) {
-        return <div className="text-error">{error.message}</div>;
+    } else if (isError || postItemResult.isError) {
+        return (
+            <div className="text-error">
+                <div>{error.message}</div>
+                <div>{postItemResponse.error.message}</div>
+            </div>
+        );
     }
-    // TODO: Navigate to display page if posting is successful or display error
 
     return (
         <form
