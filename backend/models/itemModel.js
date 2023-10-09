@@ -34,14 +34,7 @@ const schema = mongoose.Schema({
         type: [Boolean],
     },
     colorFields: {
-        type: [
-            {
-                red: Number,
-                green: Number,
-                blue: Number,
-                _id: false,
-            },
-        ],
+        type: [String],
     },
 });
 
