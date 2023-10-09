@@ -71,6 +71,15 @@ const CollectionPage = () => {
                 <DisplayFieldsNames fields={data.colorFieldsNames} name={"color fields"} />
                 <DisplayFieldsNames fields={data.numberFieldsNames} name={"number fields"} />
                 <DisplayFieldsNames fields={data.dateFieldsNames} name={"date fields"} />
+                <div className="flex flex-row max-w-[8rem]">
+                    <Link className="flex items-center justify-center bg-transparent border-2 rounded-l-lg hover:text-text hover:bg-accent border-accent text-accent grow bg-primary" to={"/item/post/" + id}>
+                        <span className="material-symbols-outlined">add_ad</span>
+                    </Link>
+                    {/* TODO: add deleting modal with confirm */}
+                    <button type="button" className="flex items-center justify-center bg-transparent border-2 rounded-r-lg hover:bg-error/50 border-error text-error grow bg-primary">
+                        <span className="material-symbols-outlined">folder_delete</span>
+                    </button>
+                </div>
             </div>
         );
     }
