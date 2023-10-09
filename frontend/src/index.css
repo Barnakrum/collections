@@ -30,7 +30,8 @@ body {
     font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
-input {
+input,
+textarea {
     @apply bg-background;
     @apply border-text/30;
     @apply focus:border-primary;
