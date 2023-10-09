@@ -4,6 +4,7 @@ const initialState = {
     isLoggedIn: undefined,
     username: "",
     id: "",
+    isAdming: false,
 };
 
 export const sessionSlice = createSlice({
@@ -14,11 +15,13 @@ export const sessionSlice = createSlice({
             state.id = action.payload.id;
             state.username = action.payload.username;
             state.isLoggedIn = true;
+            state.isAdmin = action.payload.isAdmin;
         },
         logout: (state) => {
             state.id = "";
             state.username = "";
             state.isLoggedIn = false;
+            state.isAdmin = false;
         },
     },
 });
