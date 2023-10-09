@@ -93,6 +93,19 @@ export const backendApi = createApi({
                 };
             },
         }),
+        //ITEM
+        postItem: builder.mutation({
+            query: ({ id, payload }) => ({
+                url: "/item/" + id,
+                method: "POST",
+                body: payload,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                credentials: "include",
+            }),
+        }),
+
         //USER
         getUser: builder.query({
             query: (id) => ({
@@ -116,4 +129,5 @@ export const {
     useGetUserQuery,
     useLazyGetUserQuery,
     useGetAllColectionsQuery,
+    usePostItemMutation,
 } = backendApi;
