@@ -11,6 +11,16 @@ const getItem = async (req, res) => {
     }
 };
 
+const getAllItems = async (req, res) => {
+    try {
+        const items = await Item.find({ ...req.query }).setOptions({ sanitizeFilter: true });
+
+        res.status(200).send(items);
+    } catch (error) {
+        res.status(400).send({ message: error.message });
+    }
+};
+
 const postItem = async (req, res) => {
     try {
         const { name, description, stringFields, numberFields, dateFields, booleanFields, colorFields } = req.body;
@@ -43,4 +53,4 @@ const deleteItem = async (req, res) => {
     }
 };
 
-module.exports = { postItem, deleteItem, patchItem, getItem };
+module.exports = { postItem, deleteItem, patchItem, getItem, getAllItems };
