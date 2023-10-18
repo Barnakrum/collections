@@ -1,6 +1,6 @@
 ### Preview
 
-    [Link](https://collectionfrontend.onrender.com/)
+[Link](https://collectionfrontend.onrender.com/)
 
 ### To Do
 
