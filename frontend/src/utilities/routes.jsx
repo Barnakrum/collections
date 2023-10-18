@@ -10,6 +10,7 @@ import CollectionPage from "../components/collection/CollectionPage";
 import PostCollectionImage from "../components/collection/PostCollectionImage";
 import UserProfile from "../components/user/UserProfile";
 import PostItem from "../components/item/PostItem";
+import ItemPage from "../components/item/ItemPage";
 
 const routes = [
     //auth
@@ -60,6 +61,10 @@ const routes = [
     {
         path: "/item/post/:id",
         element: <PostItem />,
+    },
+    {
+        path: "/item/:id",
+        element: <ItemPage />,
     },
 ];
 
