@@ -5,7 +5,9 @@ const router = express.Router();
 const auth = require("../middlewares/auth");
 const verifyMongoId = require("../middlewares/verifyMongoId");
 
-const { getItem, deleteItem, postItem, patchItem } = require("../controllers/itemController");
+const { getItem, deleteItem, postItem, patchItem, getAllItems } = require("../controllers/itemController");
+
+router.get("/", verifyMongoId("query"), getAllItems);
 
 //item id
 router.get("/:id", verifyMongoId(), getItem);
