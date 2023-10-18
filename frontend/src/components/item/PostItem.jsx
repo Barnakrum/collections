@@ -93,6 +93,7 @@ function FieldNames({ data, inputType, setFields, fields, defaultValue }) {
                         <label>{field}</label>
                         <input
                             required={inputType === "checkbox" ? false : true}
+                            max={inputType === "datetime-local" ? "3000-01-01T00:00" : ""}
                             type={inputType}
                             onChange={(event) => {
                                 setFields(
