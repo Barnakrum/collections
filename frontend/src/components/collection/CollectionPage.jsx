@@ -5,6 +5,7 @@ import DisplayFieldsNames from "./DisplayFieldsNames";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import UsernameLink from "../user/UsernameLink";
+import ItemList from "../item/ItemList";
 
 const CollectionPage = () => {
     const { id } = useParams();
@@ -91,6 +92,7 @@ const CollectionPage = () => {
                         ""
                     )}
                 </div>
+                <ItemList id={id} />
             </div>
         );
     }
