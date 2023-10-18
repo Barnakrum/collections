@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetItemQuery, useGetUserQuery } from "../../services/backend";
 import Spinner from "../utility/Spinner";
 import UsernameLink from "../user/UsernameLink";
@@ -17,8 +17,13 @@ const ItemPage = () => {
     return (
         <div>
             <h1 className="text-5xl">{data.name}</h1>
-            <div className="flex gap-1">
-                Owner: <UsernameLink id={data.user} />
+            <div className="flex flex-col gap-2">
+                <div className="flex gap-1">
+                    Owner: <UsernameLink id={data.user} />
+                </div>
+                <div className="flex gap-1">
+                    Collection: <Link to={"/collection/" + data.collectionId}>{data.collectionId}</Link>
+                </div>
             </div>
             {/* TODO: make description use markdown */}
             <p>{data.description}</p>
