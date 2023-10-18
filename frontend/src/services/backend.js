@@ -111,6 +111,16 @@ export const backendApi = createApi({
                 method: "GET",
             }),
         }),
+        getAllItems: builder.query({
+            query: (arg) => {
+                const { collectionId } = arg;
+                return {
+                    url: "/item/",
+                    params: { collectionId },
+                    method: "GET",
+                };
+            },
+        }),
 
         //USER
         getUser: builder.query({
@@ -137,4 +147,5 @@ export const {
     useGetAllColectionsQuery,
     usePostItemMutation,
     useGetItemQuery,
+    useGetAllItemsQuery,
 } = backendApi;
