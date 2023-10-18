@@ -4,6 +4,7 @@ import Spinner from "../utility/Spinner";
 import DisplayFieldsNames from "./DisplayFieldsNames";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import UsernameLink from "../user/UsernameLink";
 
 const CollectionPage = () => {
     const { id } = useParams();
@@ -13,7 +14,6 @@ const CollectionPage = () => {
     const isAdmin = useSelector((state) => state.session.isAdmin);
 
     const { data, error, isError, isUninitialized, isLoading, isSuccess } = useGetCollectionQuery(id);
-    const { data: user, isSuccess: userIsSuccess } = useGetUserQuery(isSuccess ? data.user : { skip: true });
 
     const [useDeleteImage, useDeleteImageResult] = useDeleteCollectionImageMutation();
 
@@ -64,16 +64,11 @@ const CollectionPage = () => {
                                 </div>
                             ))}
                         </div>
-                        {userIsSuccess ? (
-                            <div className="flex gap-1">
-                                Owner:
-                                <Link className="underline" to={"/user/" + user.id}>
-                                    {user.username}
-                                </Link>
-                            </div>
-                        ) : (
-                            <></>
-                        )}
+
+                        <div className="flex gap-1">
+                            Owner:
+                            <UsernameLink id={data.user} />
+                        </div>
                     </div>
                 </div>
                 <DisplayFieldsNames fields={data.stringFieldsNames} name={"text fields"} />
