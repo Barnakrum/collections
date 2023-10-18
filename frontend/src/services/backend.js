@@ -105,6 +105,12 @@ export const backendApi = createApi({
                 credentials: "include",
             }),
         }),
+        getItem: builder.query({
+            query: (id) => ({
+                url: "/item/" + id,
+                method: "GET",
+            }),
+        }),
 
         //USER
         getUser: builder.query({
@@ -130,4 +136,5 @@ export const {
     useLazyGetUserQuery,
     useGetAllColectionsQuery,
     usePostItemMutation,
+    useGetItemQuery,
 } = backendApi;
