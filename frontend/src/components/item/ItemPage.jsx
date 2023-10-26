@@ -3,6 +3,7 @@ import { useGetItemQuery, useGetUserQuery } from "../../services/backend";
 import Spinner from "../utility/Spinner";
 import UsernameLink from "../user/UsernameLink";
 import DisplayItemFieldsWithNames from "./DisplayItemFieldsWithNames";
+import CollectionLink from "../collection/CollectionLink";
 
 const ItemPage = () => {
     const { id } = useParams();
@@ -18,11 +19,15 @@ const ItemPage = () => {
         <div>
             <h1 className="text-5xl">{data.name}</h1>
             <div className="flex flex-col gap-2">
-                <div className="flex gap-1">
-                    Owner: <UsernameLink id={data.user} />
-                </div>
-                <div className="flex gap-1">
-                    Collection: <Link to={"/collection/" + data.collectionId}>{data.collectionId}</Link>
+                <div className="flex gap-1 text-text/70">
+                    Collection:{" "}
+                    <p className="text-primary">
+                        <CollectionLink id={data.collectionId} />
+                    </p>
+                    <p>by</p>
+                    <p className="text-accent">
+                        <UsernameLink id={data.user} />
+                    </p>
                 </div>
             </div>
             {/* TODO: make description use markdown */}
