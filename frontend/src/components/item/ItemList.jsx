@@ -16,7 +16,7 @@ const ItemList = ({ id }) => {
         return <div>{error.data.message}</div>;
     }
     return (
-        <div>
+        <div className="flex flex-col gap-3 md:max-w-3xl">
             {data.map((item, index) => (
                 <ItemCard key={index} item={item} canModify={isAdmin || item.user === userId} />
             ))}
@@ -26,7 +26,7 @@ const ItemList = ({ id }) => {
 
 const ItemCard = ({ item, canModify }) => {
     return (
-        <div className="relative flex flex-col gap-2 p-2 border-2 border-primary/30 group">
+        <div className="relative flex flex-col gap-2 p-2 rounded-xl bg-text/[0.03] group">
             <div className="absolute flex invisible top-2 right-2 group-hover:visible">
                 {/* {TODO: add delete and edit functionality} */}
                 <button type="button">
