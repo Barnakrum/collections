@@ -24,8 +24,8 @@ const DisplayItemFieldsWithNames = ({ id, fieldsValues, fieldType, name }) => {
 const FormattedField = ({ fieldType, fieldValue }) => {
     if (fieldType === "boolean") {
         if (fieldValue) {
-            return <span className="material-symbols-outlined">new_releases</span>;
-        } else return <span className="material-symbols-outlined">block</span>;
+            return <span className="text-accent material-symbols-outlined">new_releases</span>;
+        } else return <span className="text-error material-symbols-outlined">block</span>;
     }
     if (fieldType === "color") {
         return (
