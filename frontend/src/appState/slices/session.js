@@ -4,7 +4,7 @@ const initialState = {
     isLoggedIn: undefined,
     username: "",
     id: "",
-    isAdming: false,
+    isAdmin: false,
 };
 
 export const sessionSlice = createSlice({
