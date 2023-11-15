@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const backendApi = createApi({
     reducerPath: "backend",
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BACKEND_URL }),
+    tagTypes: ["Items"],
     endpoints: (builder) => ({
         //AUTH
         login: builder.mutation({
@@ -120,6 +121,15 @@ export const backendApi = createApi({
                     method: "GET",
                 };
             },
+            providesTags: ["Items"],
+        }),
+        deleteItem: builder.mutation({
+            query: (id) => ({
+                url: "/item/" + id,
+                method: "DELETE",
+                credentials: "include",
+            }),
+            invalidatesTags: ["Items"],
         }),
 
         //USER
@@ -148,4 +158,5 @@ export const {
     usePostItemMutation,
     useGetItemQuery,
     useGetAllItemsQuery,
+    useDeleteItemMutation,
 } = backendApi;
