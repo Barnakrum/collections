@@ -94,6 +94,13 @@ export const backendApi = createApi({
                 };
             },
         }),
+        deleteCollection: builder.mutation({
+            query: ({ id }) => ({
+                url: "collection/" + id,
+                method: "DELETE",
+                credentials: "include",
+            }),
+        }),
         //ITEM
         postItem: builder.mutation({
             query: ({ id, payload }) => ({
@@ -159,4 +166,5 @@ export const {
     useGetItemQuery,
     useGetAllItemsQuery,
     useDeleteItemMutation,
+    useDeleteCollectionMutation,
 } = backendApi;
